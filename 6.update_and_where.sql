@@ -28,7 +28,7 @@ WHERE store_id = '1';
 Se puede modificar el valor a mas de una columna.
 Si se omite la clausula WHERE, todas las filas de la tabla veran cambiado el dato introducido.
 
-Modificar el la tabla cars el valor de la columna color por 'blue' y año por 1970 donde la columna brand sea 'Toyota'.
+Modificar la tabla cars el valor de la columna color por 'blue' y año por 1970 donde la columna brand sea 'Toyota'.
 UPDATE cars
 SET color = 'blue', year = 1970
 WHERE brand = 'Toyota';
