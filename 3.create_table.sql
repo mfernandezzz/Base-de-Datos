@@ -15,7 +15,7 @@ CREATE TABLE director(
 );
 
 CREATE TABLE videojuegos(
-    id_videojuego SERIAL Primary Key,
+    id_videojuego SERIAL PRIMARY KEY,
 	Título VARCHAR(30) NOT NULL,
 	Consola VARCHAR(15) NOT NULL,
 	Descripción VARCHAR(200),
@@ -23,3 +23,4 @@ CREATE TABLE videojuegos(
 	lenguaje VARCHAR(15) NOT NULL,
 	Última_actualización DATE NOT NULL 
 );
+
