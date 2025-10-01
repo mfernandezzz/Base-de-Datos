@@ -49,7 +49,6 @@ proviene la clave foranea y el nombre de la columna que almacena la misma. Asi s
 informacion_pagos, donde un usuario puede tener muchos datos de pagos realizados, por lo que la tabla informacion_pagos recibe como clave foranea la id 
 del usuario para poder vincular todos los pagos realizados por dicho usuario.
 
-
 Ejemplo:
 CREATE TABLE profesores(
     id_profesor SERIAL PRIMARY KEY,
