@@ -21,5 +21,3 @@ WHERE brand = 'volvo';
 
 Asi como una tabla puede ser creada tambien puede ser eliminada:
 DROP TABLE videoujuegos; 
-
-
