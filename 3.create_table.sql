@@ -9,13 +9,13 @@ CREATE TABLE estudiantes(
 );
 
 CREATE TABLE director(
-    director_id serial PRiMARY KEY,
+    director_id SERIAL PRiMARY KEY,
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL 
 );
 
 CREATE TABLE videojuegos(
-    id_videojuego serial Primary Key,
+    id_videojuego SERIAL Primary Key,
 	Título VARCHAR(30) NOT NULL,
 	Consola VARCHAR(15) NOT NULL,
 	Descripción VARCHAR(200),
