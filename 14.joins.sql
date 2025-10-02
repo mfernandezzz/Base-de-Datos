@@ -24,8 +24,8 @@ separado por un signo de = la clave primaria y foranea que permiten la union ent
 
 Consulta usando join y alias:
 SELECT est.nombre, ent.archivo. ent.nota
-FROM entregas as "ent"
-JOIN estudiantes as "est"
+FROM entregas as ent
+JOIN estudiantes as est
     ON est.id = ent.estudiantes_id;
 
 --Tipos de Join:
@@ -124,7 +124,7 @@ FULL OUTER JOIN store
     ON staff.staff_id = store.manager_staff_id
 LEFT JOIN address
     ON store.address_id = address.address_id
-GROUP BY rental.rental_id;
+GROUP BY rental.rental_id, store.store_id, address.address;
 
 Buscar y mostrar la pelicula mas alquilada:
 SELECT film.title AS Title, count(rental.rental_id) AS Rentals
