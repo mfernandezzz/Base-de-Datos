@@ -1,6 +1,6 @@
 Parte 1: Analisis
 Realizar una consulta que muestre el monto total facturado por cada local:
-SELECT store.store_id, SUM(payment.amount)
+SELECT store.store_id, SUM(payment.amount) AS total_amount
 FROM payment
 LEFT JOIN staff
     ON payment.staff_id = staff.staff_id
@@ -10,7 +10,7 @@ GROUP BY store.store_id;
 
 Realizar una consulta para visualizar las ventas por mes para todo el periodo. La consulta debe tener el monto total para cada mes del periodo que se
 tenga datos. Ordenar por recaudacion de mayor a menor.
-SELECT to_char(rental.rental_date, 'YYYY-MM') as month, sum(payment.amount) as ganancias
+SELECT to_char(rental.rental_date, 'YYYY-MM') AS month, sum(payment.amount) AS ganancias
 FROM rental
 INNER JOIN payment
     ON rental.rental_id = payment.rental_id
@@ -20,7 +20,7 @@ ORDER BY ganancias DESC;
 
 Obtener una tabla con todas las categorias de peliculas, la cantidad de rentas por categoria, las ganancias por categoria y el porcentaje que
 represento lo recaudado por categoria respecto de la recaudacion total. Ordenar por ganancia de mayor a menor.
-SELECT category.name as categoria, COUNT(rental.rental_id) as cantidad_rentas, sum(payment.amount) as ganancias, ROUND(SUM(payment.amount) * 100 / 61312.04) as porcentaje_recaudacion
+SELECT category.name AS category, COUNT(rental.rental_id) AS rentals, SUM(payment.amount) AS ganancias, ROUND(SUM(payment.amount) * 100 / 61312.04) AS porcentaje_recaudacion
 FROM category
 LEFT JOIN film_category
 	ON category.category_id = film_category.category_id
@@ -30,12 +30,12 @@ LEFT JOIN rental
 	ON inventory.inventory_id = rental.inventory_id
 LEFT JOIN payment
 	ON rental.rental_id = payment.rental_id
-GROUP BY categoria
+GROUP BY category
 ORDER BY ganancias DESC;
 
 Obtener una tabla con las categorias de peliculas, la cantidad de rentas por categoria y el porcentaje de rentas para cada categoria con respecto de
 la cantidad maxima de rentas. Ordenar por cantidad de rentas de mayor a menor.
-SELECT category.name as categoria, COUNT(rental.rental_id) as cantidad_rentas, (COUNT(rental.rental_id) * 100 / 16044) as porcentaje_rentas
+SELECT category.name AS category, COUNT(rental.rental_id) AS rentals, (COUNT(rental.rental_id) * 100 / 16044) AS porcentaje_rentas
 FROM category
 LEFT JOIN film_category
 	ON category.category_id = film_category.category_id
@@ -43,11 +43,11 @@ LEFT JOIN inventory
 	ON film_category.film_id = inventory.film_id
 LEFT JOIN rental
 	ON inventory.inventory_id = rental.inventory_id
-GROUP BY categoria
-ORDER BY cantidad_rentas DESC;
+GROUP BY category
+ORDER BY rentals DESC;
 
 Identificar los 3 actores cuyas peliculas son las mas alquiladas en cantidad de rentas y recaudacion lograda:
-SELECT actor.first_name as nombre, actor.last_name as apellido, COUNT(rental.rental_id) as cantidad_rentas, SUM(payment.amount) as ganancias
+SELECT actor.first_name AS nombre, actor.last_name AS apellido, COUNT(rental.rental_id) AS cantidad_rentas, SUM(payment.amount) AS ganancias
 FROM actor
 LEFT JOIN film_actor
 	ON actor.actor_id = film_actor.actor_id
@@ -62,7 +62,7 @@ ORDER BY ganancias DESC
 LIMIT 3;
 
 Obtener el top 6 de clientes que mas dinero gastaron:
-SELECT customer.first_name as nombre, customer.last_name as apellido, SUM(payment.amount) as dinero_gastado
+SELECT customer.first_name AS nombre, customer.last_name AS apellido, SUM(payment.amount) AS dinero_gastado
 FROM customer
 LEFT JOIN payment
     ON customer.customer_id = payment.customer_id
