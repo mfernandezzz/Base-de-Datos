@@ -9,6 +9,12 @@ WHERE ___
 GROUP BY ___ 
 ORDER BY ___ ;
 
+Alias: funcion para cambiar el nombre tanto de columnas como de tablas. Con el uso de los alias se simplifica la tarea a la hora de trabajar con muchas
+tablas o columnas en consultas mas complejas.
+SELECT nota, count(*) AS Cantidad de alumnos
+FROM resultados AS R  --la tabla resultados pasa a llamarse R
+GROUP BY nota; --El resultado es una tabla de dos columnas con los diferentes valores de nota y al lado la cantidad de estudiantes que obtuvieron dicha nota.
+
 Obtener una tabla con el identificador de cada actor junto con la cantidad de películas que protagonizo en orden descendente:
 SELECT actor_id, COUNT(film_id) AS cantidad
 FROM film_actor
@@ -44,3 +50,4 @@ SELECT *
 FROM usuarios
 GROUP BY id_usuario
 ORDER BY edad DESC;
+
