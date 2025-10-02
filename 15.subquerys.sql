@@ -1,8 +1,4 @@
-Subconsulta
-SELECT MAX(edad)
-FROM Estudiantes;
-
-Consulta
+Subconsulta:
 SELECT *
 FROM estudiantes
 WHERE edad = (
@@ -10,13 +6,12 @@ WHERE edad = (
 	FROM Estudiantes
 );
 
-Obtener una tabla con el id de las peliculas donde actuaron los actores que participaron en la pelicula con id = 14.
+Obtener una tabla con el id de las peliculas donde actuaron los actores que participaron en la pelicula con id = 14:
 SELECT film_id
 FROM film_actor
 WHERE actor_id = 14;
 
-
-Obtener todos los nombres de peliculas donde hayan participado los actores que participaron en la pelicula con id = 14.
+Obtener todos los nombres de peliculas donde hayan participado los actores que participaron en la pelicula con id = 14:
 SELECT film.film_id, film.title
 FROM film
 WHERE film_id in (
@@ -25,9 +20,8 @@ WHERE film_id in (
 	WHERE actor_id = 14
 );
 
-
-Obtener todos los clientes de los que recibio pagos el miembro del staff con id = 1.
-SELECT customer.first_name, customer.last_name
+Obtener todos los clientes de los que recibio pagos el miembro del staff con id = 1:
+SELECT customer.first_name AS name, customer.last_name AS last_name
 FROM customer
 WHERE customer_id in (
 	SELECT customer_id
@@ -39,27 +33,17 @@ WHERE customer_id in (
 	)
 );
 
-
-Obtener todas las peliculas con categoria action.
-SELECT film.title
+Obtener todas las peliculas con categoria action:
+SELECT film.title AS title
 FROM film
 WHERE film_id in (
 	SELECT film_id
 	FROM film_category
-	WHERE category_id = 1
+	WHERE category_id = 1  --el id de la categoria action, previamente obtenido con un select
 );
 
-SELECT film.title, category.name
-FROM film
-RIGHT JOIN film_category
-	ON film.film_id = film_category.film_id
-INNER JOIN category
-	ON category.category_id = film_category.category_id
-WHERE category.name = 'Action';
-
-
 Obtener todos los clientes del pais numero 10:
-SELECT customer.first_name, customer.last_name
+SELECT customer.first_name AS name, customer.last_name AS last_name
 FROM customer
 WHERE address_id in (
 	SELECT address_id
@@ -75,8 +59,7 @@ WHERE address_id in (
 	)
 );
 
-
-Obtener todos los clientes que han visto peliculas en japones:
+Obtener el id de todos los clientes que han visto peliculas en japones:
 SELECT customer_id
 FROM rental
 WHERE inventory_id in (
@@ -94,7 +77,7 @@ WHERE inventory_id in (
 );
 
 Obtener la cantidad de rentas que se hicieron para las peliculas de categoria Sci-Fi:
-SELECT count(rental.rental_id)
+SELECT count(rental.rental_id) AS rentals
 FROM rental
 WHERE inventory_id in (
 	SELECT inventory_id 
@@ -111,7 +94,7 @@ WHERE inventory_id in (
 );
 
 Obtener las ganancias que obtuvo la categoria de pelicula Foreign:
-SELECT sum(payment.amount)
+SELECT sum(payment.amount) AS total_amount
 FROM payment
 WHERE rental_id in (
 	SELECT rental_id
@@ -132,14 +115,14 @@ WHERE rental_id in (
 );
 
 Mostrar los nombres de las películas en las que actuó el actor Nick Wahlberg:
-SELECT film.title as peliculas
+SELECT film.title AS peliculas
 FROM film
 WHERE film_id in (
 	SELECT film_id
 	FROM film_actor
 	WHERE actor_id in (
-		select actor_id
-		from actor
-		where actor.first_name = 'Nick' and actor.last_name = 'Wahlberg'
+		SELECT actor_id
+		FROM actor
+		WHERE actor.first_name = 'Nick' and actor.last_name = 'Wahlberg'
 	)
 );
