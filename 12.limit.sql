@@ -26,22 +26,21 @@ FROM payment
 ORDER BY payment_date DESC 
 LIMIT 5;
 
-Obtener todos los datos de la tabla payment, ordenar las filas por orden descendente y limitar los resultados a diez (los diez pagos mas grandes
-realizados):
+Obtener todos los datos de la tabla payment, ordenar las filas por monto de la renta en orden descendente y limitar los resultados a diez (los diez pagos mas 
+grandes realizados):
 SELECT * 
 FROM payment 
 ORDER BY amount DESC 
 LIMIT 10;
 
-Obtener todos los datos de la tabla customer, ordenar por ultima fecha de modificacion de sus datos descendente y limitar los resultados a 3
+Obtener todos los datos de la tabla customer, ordenar por ultima fecha de modificacion de sus datos y limitar los resultados a 3
 (los ultimos tres usuario modificados):
 SELECT * 
 FROM customer 
 ORDER BY last_update DESC 
 LIMIT 3;
 
-Obtener todos los datos de la tabla customer, agrupar por customer_id, ordenar por el valor de la columna create_date descendente y limitar los
-resultados a 1 (el primer usuario añadido a la tabla customer):
+Obtener el primer usuario añadido a la tabla customer):
 SELECT *
 FROM customer
 GROUP BY customer_id
