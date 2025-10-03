@@ -127,7 +127,7 @@ LEFT JOIN address
 GROUP BY rental.rental_id, store.store_id, address.address;
 
 Buscar y mostrar la pelicula mas alquilada:
-SELECT film.title AS Title, count(rental.rental_id) AS Rentals
+SELECT film.title AS Title, COUNT(rental.rental_id) AS Rentals
 FROM film
 FULL OUTER JOIN inventory
     ON film.film_id = inventory.film_id
@@ -138,18 +138,17 @@ ORDER BY Rentals DESC
 LIMIT 1;
 
 Mostrar una tabla con el id de cada cliente mas la direccion y el id de la tienda a la que accedio:
-SELECT customer.customer_id, address.address, store.store_id
+SELECT customer.customer_id, address.address AS address, store.store_id
 FROM customer
 INNER JOIN store
     ON store.store_id = customer.store_id
 INNER JOIN address
     ON address.address_id = store.address_id
-GROUP BY customer.customer_id, address.address, store.store_id
-ORDER BY customer.customer_id DESC;
+GROUP BY customer.customer_id, address, store.store_id;
 
 Obtener una tabla con las categorias de peliculas y la cantidad de veces que fueron rentadas peliculas de cada categoria. Agrupar por nombre de
-categoria y ordenar por cantidad de rentas de mayor a menor.
-SELECT category.name AS categoria, count(rental.rental_id) AS cantidad_rentas
+categoria y ordenar por cantidad de rentas de mayor a menor:
+SELECT category.name AS categoria, COUNT(rental.rental_id) AS cantidad_rentas
 FROM category
 JOIN film_category
 	ON category.category_id = film_category.category_id
@@ -161,8 +160,8 @@ GROUP BY categoria
 ORDER BY cantidad_rentas DESC;
 
 Obtener una tabla con las categorias de peliculas y las ganancias de rentas de peliculas para cada categoria. Agrupar por nombre de categoria y 
-ordenar por suma de ganancias en orden descendente.
-SELECT category.name as categoria, sum(payment.amount) as ganancias
+ordenar por suma de ganancias en orden descendente:
+SELECT category.name AS categoria, SUM(payment.amount) AS ganancias
 FROM category
 JOIN film_category
 	ON category.category_id = film_category.category_id
@@ -175,8 +174,8 @@ JOIN payment
 GROUP BY categoria
 ORDER BY ganancias DESC;
 
-Obtener una tabla con el id de cliente, el id de la tienda y la cantidad de dinero gastado en cada tienda.
-SELECT payment.customer_id, store.store_id, sum(amount)
+Obtener una tabla con el id de cliente, el id de la tienda y la cantidad de dinero gastado en cada tienda:
+SELECT payment.customer_id, store.store_id, SUM(amount) AS amount
 FROM payment
 JOIN staff
 	ON staff.staff_id = payment.staff_id
@@ -185,8 +184,8 @@ JOIN store
 GROUP BY payment.customer_id, store.store_id
 ORDER BY payment.customer_id DESC;
 
-Obtener una tabla con la cantidad de clientes por pais.
-SELECT country.country as pais, count(customer.customer_id) as cantidad_clientes
+Obtener una tabla con la cantidad de clientes por pais:
+SELECT country.country AS pais, COUNT(customer.customer_id) AS cantidad_clientes
 FROM country
 RIGHT JOIN city
 	ON country.country_id = city.country_id
@@ -199,17 +198,17 @@ ORDER BY cantidad_clientes DESC;
 
 Obtener una tabla con el nombre de cada cliente, la cantidad de rentas que realizo y la cantidad de dinero gastado. Agrupar por el nombre del cliente
 y ordenar por cantidad de rentas:
-SELECT customer.first_name, customer.last_name, count(rental.rental_id) as rentas, sum(payment.amount)
+SELECT customer.first_name AS name, customer.last_name AS last_name, COUNT(rental.rental_id) AS rentas, SUM(payment.amount) AS amount
 FROM customer
 LEFT JOIN rental
 	ON customer.customer_id = rental.customer_id
 RIGHT JOIN payment
 	ON rental.rental_id = payment.rental_id
-GROUP BY customer.first_name, customer.last_name
+GROUP BY name, last_name
 ORDER BY rentas DESC;
 
-Obtener cantidad de alquileres por tienda
-SELECT store.store_id as tienda, count(rental.rental_id) as cantidad_rentas
+Obtener cantidad de alquileres por tienda:
+SELECT store.store_id AS tienda, COUNT(rental.rental_id) AS cantidad_rentas
 FROM store
 RIGHT JOIN staff
 	ON store.store_id = staff.store_id
@@ -218,7 +217,7 @@ RIGHT JOIN rental
 GROUP BY tienda;
 
 Obtener ganacias por tienda:
-SELECT store.store_id as tienda, sum(payment.amount) as ganancias
+SELECT store.store_id AS tienda, SUM(payment.amount) AS ganancias
 FROM store
 RIGHT JOIN staff
 	ON store.store_id = staff.store_id
@@ -227,14 +226,14 @@ RIGHT JOIN payment
 GROUP BY tienda;
 
 Obtener la cantidad de clientes que visitaron cada tienda: 
-SELECT store.store_id as numero_tienda, count(customer.customer_id)
+SELECT store.store_id AS numero_tienda, COUNT(customer.customer_id) AS clientes
 FROM store
 RIGHT JOIN customer
 	ON store.store_id = customer.store_id
 GROUP BY numero_tienda;
 
 Obtener una tabla con el id de un pais, el pais y la cantidad de clientes por pais:
-SELECT country.country_id, country.country as pais, count(customer.customer_id) as cantidad_clientes
+SELECT country.country_id, country.country AS pais, COUNT(customer.customer_id) AS cantidad_clientes
 FROM country
 JOIN city
 	ON country.country_id = city.country_id
