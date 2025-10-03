@@ -132,5 +132,5 @@ rental_rate: 5.99
 
 INSERT INTO videogame
 (game_title, console, description, language, store_id, rental_rate)
-values
+VALUES
 ('Asdrubal Ganso Pro skater 2', 'Juegosfera', 'Juego de andar en patines y skate, no vas a ir muy rápido porque te podes marear pero al menos podes ver los paisajes.', 'Spanish', 1, 5.99);
