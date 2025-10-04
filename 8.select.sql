@@ -122,3 +122,8 @@ WHERE EXTRACT (YEAR FROM rental_date) = 2005 AND EXTRACT (MONTH FROM rental_date
 Seleccionar la cantidad de rentas que se han realizado en total entre todas las tiendas:
 SELECT COUNT(rental_id)
 FROM rental;
+
+Crear una lista de las peliculas (titulo y descripcion) cuya duracion sea mayor a 120 minutos:
+SELECT film.title AS title, film.description AS description
+FROM film
+WHERE length > 120;
