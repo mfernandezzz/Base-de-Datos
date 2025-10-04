@@ -53,6 +53,12 @@ FROM tabla1 as t1
     INNER JOIN tabla2 as t2
        ON t1.id = t2.id;
 
+Mostrar la direccion de cada tienda:
+SELECT store.store_id, address.address AS address
+FROM store
+JOIN address
+	ON store.address_id = address.address_id
+GROUP BY store.store_id, address;
 
 Mostrar una tabla con el nombre, apellido y direccion de cada cliente:
 SELECT customer.first_name AS Name, customer.last_name AS Last_Name, address.address AS Address
@@ -61,11 +67,63 @@ LEFT JOIN address
 	ON customer.address_id = address.address_id
 GROUP BY Address;
 
-Mostrar una tabla con la direccion y el id de la tienda a la que corresponde la misma:
-SELECT address.address, store.store_id
-FROM address
-RIGHT JOIN store
-	ON address.address_id = store.store_id
+Cual es el nombre y apellido del cliente que vive en la ciudad 'Apeldoorn'?
+SELECT customer.first_name AS name, customer.last_name AS last_name
+FROM customer
+JOIN address
+	ON customer.address_id = address.address_id
+JOIN city
+	ON address.city_id = city.city_id
+WHERE city.city = 'Apeldoorn'
+GROUP BY name, last_name;
+
+Cual es la categoria de la pelicula 'Arabia Dogma'?
+SELECT category.name AS category
+FROM category
+JOIN film_category
+	ON category.category_id = film_category.category_id
+JOIN film
+	on film.film_id = film_category.film_id
+WHERE film.title = 'Arabia Dogma'
+GROUP BY category;
+
+Que actores (sus nombres y apellidos) participaron en la pelicula 'Interview Liaisons'?
+SELECT actor.first_name AS nombre, actor.last_name AS apellido
+FROM actor
+JOIN film_actor
+	ON actor.actor_id = film_actor.actor_id
+JOIN film
+	ON film.film_id = film_actor.film_id
+WHERE film.title = 'Interview Liaisons'
+GROUP BY nombre, apellido;
+
+Cual es el nombre del miembro del staff que le rento una copia de la pelicula 'Hunchback Impossible' al cliente Kurt Emmons?
+SELECT staff.first_name AS nombre, staff.last_name AS apellido
+FROM staff
+JOIN rental
+	ON staff.staff_id = rental.staff_id
+JOIN customer
+	ON rental.customer_id = customer.customer_id
+WHERE customer.first_name = 'Kurt' and customer.last_name = 'Emmons'
+GROUP BY nombre, apellido;
+--en el resultado de la consulta se aprecia que ambos miembros del staff le rentaron peliculas al cliente Kurt Emmons, sin embargo, dicho cliente solo
+--visito una de las tiendas. Esto es asi debido a que no todas las peliculas se encuentran en ambas tiendas, por lo que si un cliente quiere rentar una
+--pelicula que se encuentra en el inventario de otra tienda, la renta es realizada por el miembro del staff de esa otra tienda.
+
+Cantidad de veces que el cliente Vivian Ruiz rento peliculas:
+SELECT COUNT(rental.rental_id) AS cantidad_rentas
+FROM rental
+JOIN customer
+	ON rental.customer_id = customer.customer_id
+WHERE customer.first_name = 'Vivian' AND customer.last_name = 'Ruiz';
+
+Mostrar la cantidad de peliculas (items) disponibles en cada tienda:
+SELECT store.store_id, COUNT(film.film_id)
+FROM store
+JOIN inventory
+	ON store.store_id = inventory.store_id
+JOIN film
+	ON inventory.film_id = film.film_id
 GROUP BY store.store_id;
 
 Mostrar una tabla con todas las ciudades y su pais al lado.
