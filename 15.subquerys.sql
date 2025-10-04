@@ -6,6 +6,32 @@ WHERE edad = (
 	FROM Estudiantes
 );
 
+Cual es el nombre y apellido del cliente que vive en la ciudad 'Apeldoorn'?
+SELECT customer.first_name AS name, customer.last_name AS last_name
+FROM customer
+WHERE address_id in (
+	SELECT address_id
+	FROM address
+	WHERE city_id in (
+		SELECT city_id
+		FROM city
+		WHERE city.city = 'Apeldoorn'
+	)
+);
+
+Cual es la categoria de la pelicula 'Arabia Dogma'?
+SELECT category.name AS category
+FROM category
+WHERE category_id IN (
+	SELECT category_id
+	FROM film_category
+	WHERE film_id IN (
+		SELECT film_id
+		FROM film
+		WHERE film.title = 'Arabia Dogma'
+	)
+);
+
 Obtener una tabla con el id de las peliculas donde actuaron los actores que participaron en la pelicula con id = 14:
 SELECT film_id
 FROM film_actor
