@@ -1,18 +1,17 @@
-La sentencia SELECT se utiliza para consultar datos de una tabla o tablas. A esta sentencia se le pueden aplicar diferentes operadores logicos para
-poder consultar datos mas especificos. 
+La sentencia SELECT se utiliza para consultar datos de una tabla. A esta sentencia se le pueden aplicar diferentes operadores logicos para poder consultar
+datos mas especificos. 
+
+SELECT *  --selecciona todo los datos de una tabla
+FROM estudiantes;
 
 Seleccionar los datos de la columna nombre y apellido de la tabla estudiantes:
-SELECT nombre, apellido
+SELECT nombre, apellido  --se especifican las columnas cuyos datos se quieren obtener
 FROM estudiantes;
 
 Seleccionar los datos de la columna nombre y apellido de la tabla estudiantes donde el valor de la columna color_fav sea 'azul':
 SELECT nombre, apellido
 FROM estudiantes
 WHERE color_favorito = 'azul';
-
-Seleccionar todos los datos de una tabla:
-SELECT *
-FROM estudiantes;
 
 Seleccionar todos los datos de la tabla usuarios donde el valor de la columna id sea 3 o el valor de la columna nombre sea 'Javier':
 SELECT *
@@ -34,12 +33,12 @@ SELECT *
 FROM usuarios
 WHERE edad < 30;
 
-Seleccionar los datos de la columna film_id de la tabla film_actor donde el valor de la columna actor_id sea 16:
+Obtener los datos de la columna film_id de la tabla film_actor donde el valor de la columna actor_id sea 16:
 SELECT film_id
 FROM film_actor
 WHERE actor_id = 16;
 
-Seleccionar los datos de la columna first_name de la tabla staff donde el valor de la columna store_id sea 2:
+Obtener los datos de la columna first_name de la tabla staff donde el valor de la columna store_id sea 2:
 SELECT first_name
 FROM staff
 WHERE store_id = 2;
