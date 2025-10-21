@@ -1,10 +1,5 @@
-Sentencia para el ingreso de datos en una tabla. Se especifica el nombre de la tabla, sus columnas entre parentesis, la palabra clave VALUES y
+La sentencia INSERT permite el ingreso de datos a una tabla. Se especifica el nombre de la tabla, sus columnas entre parentesis, la palabra clave VALUES y
 debajo los valores para cada columna tambien entre parentesis.
-
-INSERT INTO nombre_tabla 
-(columna1, columna2, columna3)
-VALUES
-('valor1', 'valor2', 'valor3');
 
 INSERT INTO estudiantes
 (nombre, apellido, edad, color_favorito)
