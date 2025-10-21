@@ -10,23 +10,23 @@ de otra tabla.
 
 En las Bases de Datos se pueden almacenar diferentes tipos de datos: 
 Datos de texto (nombres, apellidos)
-Datos numericos(edad, estatura) 
+Datos numericos (edad, estatura) 
 Datos de fecha (dia de registro, dia de nacimiento)
 Datos booleanos (valores true o false)
 
 VARCHAR: significa 'varying character' y permite almacenar un dato de texto determinando su largo de caracteres. 
-nombre VARCHAR(20)  -el nombre del dato, la sentencia y la cantidad de caracteres.
-email VARCHAR(30)
+nombre VARCHAR(50)
+email VARCHAR(50)
 
 TEXT: se determina que el contenido de un dato sera un texto.
 descripcion_producto TEXT
 descripcion_pelicula TEXT
 
 INT: permite agregar numeros enteros como dato.
-edad INT(25)  -se le asigna a edad el dato 25.
+edad INT
 
 REAL: permite agregar numeros decimales.
-precio REAL(12.5)
+precio REAL
 
 DATE: permite agregar fechas en formato YYYY-MM-DD
 fecha DATE 2024-04-19
@@ -48,3 +48,4 @@ BIGINT: variacion de INT que permite almacenar numeros muy grandes.
 
 La existencia de ambos se debe a que, dependiendo el caso, se optara por uno en base al tamaño de la base de datos con el objetivo de no utilizar mas
 espacio de memoria del necesario.
+
