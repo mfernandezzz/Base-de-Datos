@@ -8,6 +8,8 @@ Las Bases de Datos estan compuestas de tablas relacionadas entre si. Cada tabla 
 identificacion, cuyo objetivo es almacenar los id necesarios para, por ejemplo, identificar de forma unica a una persona para asi vincularla con otro dato
 de otra tabla.
 
+Nunca se debe poner el mismo nombre a dos bases de datos o a dos tablas.
+
 En las Bases de Datos se pueden almacenar diferentes tipos de datos: 
 Datos de texto (nombres, apellidos)
 Datos numericos (edad, estatura) 
@@ -48,4 +50,5 @@ BIGINT: variacion de INT que permite almacenar numeros muy grandes.
 
 La existencia de ambos se debe a que, dependiendo el caso, se optara por uno en base al tamaño de la base de datos con el objetivo de no utilizar mas
 espacio de memoria del necesario.
+
 
