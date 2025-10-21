@@ -1,23 +1,18 @@
-La sentencia DELETE permite borrar informacion de las tablas.
+La sentencia DELETE permite borrar informacion de una tabla.
 
-Eliminar todas las filas de una tabla:
-DELETE FROM ESTUDIANTES;
+DELETE FROM ESTUDIANTES;  --elimina todas las filas de una tabla
 
-Eliminar una fila de una tabla si contiene los datos especificados:
 DELETE FROM director 
-WHERE first_name='Clint' and last_name='Almodóvar';
+WHERE first_name='Clint' and last_name='Almodóvar';  --eliminar una fila de una tabla si contiene los datos especificados
 
-Eliminar una fila de una tabla en base a su id:
-DELETE FROM director
-WHERE director_id = 5;
-
-Eliminar una columna de una tabla:
 ALTER TABLE cars
-DROP COLUMN year;
+DROP COLUMN year;  --se elimina la coumna year de la tabla cars
 
-Eliminar todos los resultados si una columna contiene el dato especificado:
 DELETE FROM cars
-WHERE brand = 'volvo';
+WHERE brand = 'volvo';  --se eliminan todas las filas de la tabla donde la columna brand tenga el valor 'Volvo'
 
-Asi como una tabla puede ser creada tambien puede ser eliminada:
-DROP TABLE videoujuegos; 
+DROP TABLE videoujuegos;  --se elimina la tabla videojuegos
+
+--Eliminar una fila de una tabla en base a su id (mala practica):
+--DELETE FROM director
+--WHERE director_id = 5;
