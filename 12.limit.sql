@@ -1,5 +1,5 @@
-Con la palabra clave limit se puede indicar la cantidad de filas que se quiere consultar. Esto es util para optimizar la velocidad de una consulta y 
-visualizar asi solo las filas de datos necesarias, teniendo en cuenta que una tabla en una base de datos grande pueden llegar a tener miles de filas. 
+Con la palabra clave limit se puede indicar la cantidad de filas que se quiere consultar. Esto es util para optimizar la velocidad de una consulta y visualizar asi
+solo las filas de datos necesarias, teniendo en cuenta que una tabla en una base de datos grande pueden llegar a tener miles de filas. 
 La estructura de una query usando limit es la siguiente:
 SELECT ___
 FROM ___
@@ -19,22 +19,19 @@ FROM estudiantes
 ORDER BY id DESC 
 LIMIT 1;
 
-Obtener todos los datos de la tabla payment, ordenar las filas por el valor de la columna payment_date descendente y limitar los resultados a 5
-(ultimos cinco pagos realizados):
+Obtener todos los datos de la tabla payment, ordenar las filas por el valor de la columna payment_date descendente y limitar los resultados a 5:
 SELECT * 
 FROM payment 
 ORDER BY payment_date DESC 
 LIMIT 5;
 
-Obtener todos los datos de la tabla payment, ordenar las filas por monto de la renta en orden descendente y limitar los resultados a diez (los diez pagos mas 
-grandes realizados):
+Obtener todos los datos de la tabla payment, ordenar las filas por monto de la renta en orden descendente y limitar los resultados a diez:
 SELECT * 
 FROM payment 
 ORDER BY amount DESC 
 LIMIT 10;
 
-Obtener todos los datos de la tabla customer, ordenar por ultima fecha de modificacion de sus datos y limitar los resultados a 3
-(los ultimos tres usuario modificados):
+Obtener todos los datos de la tabla customer, ordenar por ultima fecha de modificacion de sus datos y limitar los resultados a 3:
 SELECT * 
 FROM customer 
 ORDER BY last_update DESC 
