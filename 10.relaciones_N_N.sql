@@ -1,4 +1,4 @@
-Para crear relaciones N a N, se debe crear una tabla intermedia que vincule a ambas. Por ejemplo, una tabla USUARIOS se vincula con la tabla PELICULAS
+Para crear relaciones N a N, se debe crear una tabla intermedia que vincule a ambas. Por ejemplo, una tabla usuarios se vincula con la tabla peliculas
 a traves de una tabla intermedia llamada Usuarios-Peliculas. De esta forma, se tiene una relacion N a N debido a que N usuarios miran N cantidad de
 peliculas y N cantidad de peliculas son vistas por N cantidad de usuarios.
 
@@ -17,68 +17,44 @@ CREATE TABLE usuarios_peliculas (
         FOREIGN KEY (id_pelicula)
             REFERENCES peliculas(id_pelicula)
 );
-
 Al ser una tabla intermedia, los valores de las dos columnas seran claves primarias y claves foraneas de la tabla usuarios y peliculas. En la primera
-restriccion se especifica entre parentesis que la clave primaria de las dos columnas de la tabla seran la clave primaria de usuarios y de peliculas.
+restriccion se especifica entre parentesis que las claves primaria de la tabla seran la clave primaria de usuarios y de peliculas.
 En la segunda restriccion, se vincula la tabla usuarios_peliculas con la tabla usuarios, donde se especifica que la clave foranea sera id_usuario y
 su referencia sera la tabla usuarios. En la tercera restriccion es el mismo procedimiento anterior pero para la tabla peliculas.
 
 Ejemplo:
-CREATE TABLE profesores (
+CREATE TABLE usuarios_cursos (
     id_usuario INT NOT NULL,
     id_curso INT NOT NULL,
 
-    CONSTRAINT profesores_pkey
+    CONSTRAINT usuarios_cursos_pkey
         PRIMARY KEY (id_usuario, id_curso),
 
-    CONSTRAINT fk_profesores_usuarios
+    CONSTRAINT fk_usuarios_cursos_usuarios
         FOREIGN KEY (id_usuario)
             REFERENCES usuarios(id_usuario),
 
-    CONSTRAINT fk_profesores_cursos
+    CONSTRAINT fk_usuarios_cursos_cursos
         FOREIGN KEY (id_curso)
             REFERENCES cursos(id_curso)
-); --La tabla profesores es la intermedia entre usuarios y cursos.
-
-Ingreso de datos en la tabla intermedia profesores:
-INSERT INTO profesores
-(id_curso, id_usuario)
-VALUES
-(1, 1),
-(3, 1),
-(5, 1),
-(2, 3),
-(3, 4),
-(4, 4);
+); --Un usuario puede cursar N cantidad de cursos, un curso puede ser cursado por N cantidad de usuarios.
 
 Ejemplo:
-CREATE TABLE alumnos (
-    id_curso INT NOT NULL,
-    id_usuario INT NOT NULL,
+CREATE TABLE film_actor (
+    film_id INT NOT NULL,
+    actor_id INT NOT NULL,
 	
-    CONSTRAINT alumnos_pk
-        PRIMARY KEY (id_curso, id_usuario),
+    CONSTRAINT film_actor_pkey
+        PRIMARY KEY (film_id, actor_id),
 
-    CONSTRAINT fk_alumnos_cursos
-		FOREIGN KEY (id_curso)
-            REFERENCES cursos(id_curso),
+    CONSTRAINT fk_film_actor_film
+		FOREIGN KEY (film_id)
+            REFERENCES film(film_id),
 
-    CONSTRAINT fk_alumnos_usuarios
-        FOREIGN KEY (id_usuario)
-            REFERENCES usuarios(id_usuario)
-); --La tabla alumnos es la intermedia entre usuarios y cursos.
-
-Ingreso de datos en la tabla intermedia alumnos:
-INSERT INTO alumnos 
-(id_usuario, id_curso)
-VALUES
-(2, 1),
-(2, 2 ),
-(4, 1),
-(5, 1),
-(6, 2),
-(7, 2),
-(8, 3);
+    CONSTRAINT fk_film_actor_actor
+        FOREIGN KEY (actor_id)
+            REFERENCES actor(actor_id)
+); --Una pelicula puede tener N cantidad de actores, un actor puede participar en N cantidad de peliculas.
 
 Ejemplo:
 CREATE TABLE resultados (
@@ -96,16 +72,15 @@ CREATE TABLE resultados (
 	CONSTRAINT fk_resultados_cursos
 		FOREIGN KEY (id_curso)
 			REFERENCES cursos(id_curso)
-);
+); --Esta tabla intermedia tendra el id del usuario, el id del curso y la nota correspondiente a ese usuario en ese curso.
 
 En muchos casos, una tabla intermedia tendra su propia clave primaria, por lo que a la hora de crear las restricciones solo se estableceran las mismas
 para las claves foraneas.
-Ejemplo:
 CREATE TABLE order_details (
     id_order_detail SERIAL PRIMARY KEY,
-    id_order INT,
-    id_product INT,
-    quantity INT,
+    id_order INT NOT NULL,
+    id_product INT NOT NULL,
+    quantity INT NOT NULL,
 
     CONSTRAINT fk_order_details_orders
         FOREIGN KEY (id_order)
@@ -115,7 +90,6 @@ CREATE TABLE order_details (
         FOREIGN KEY (id_product)
             REFERENCES products(id_product)
 );
-
 La tabla order_details sera la intermedia entre la tabla orders y products y tendra su propia clave primaria. En la primera restriccion se especifica que la 
 clave foranea sera la clave primaria de la tabla orders. En la segunda restriccion se especifica que la clave foranea sera la clave primaria de la tabla 
 products. Se tiene asi una relacion N a N, donde N cantidad de ordenes corresponden a N cantidad de productos y viceversa. Accediendo a la id de la tabla
