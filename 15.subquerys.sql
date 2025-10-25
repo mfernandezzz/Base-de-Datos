@@ -4,7 +4,7 @@ FROM estudiantes
 WHERE edad = (
 	SELECT MAX(edad)
 	FROM Estudiantes
-);
+); --se obtiene los datos del estudiante con mayor edad
 
 Cual es el nombre y apellido del cliente que vive en la ciudad 'Apeldoorn'?
 SELECT customer.first_name AS name, customer.last_name AS last_name
@@ -31,11 +31,6 @@ WHERE category_id IN (
 		WHERE film.title = 'Arabia Dogma'
 	)
 );
-
-Obtener una tabla con el id de las peliculas donde actuaron los actores que participaron en la pelicula con id = 14:
-SELECT film_id
-FROM film_actor
-WHERE actor_id = 14;
 
 Obtener todos los nombres de peliculas donde hayan participado los actores que participaron en la pelicula con id = 14:
 SELECT film.film_id, film.title
