@@ -3,7 +3,7 @@ Realizar una consulta para visualizar las ventas por mes para todo el periodo. L
 tenga datos. Ordenar por recaudacion de mayor a menor.
 SELECT to_char(rental.rental_date, 'YYYY-MM') AS month, sum(payment.amount) AS ganancias
 FROM rental
-INNER JOIN payment
+JOIN payment
     ON rental.rental_id = payment.rental_id
 WHERE rental.rental_date BETWEEN '2005-05-24' AND '2006-03-14'
 GROUP BY month
